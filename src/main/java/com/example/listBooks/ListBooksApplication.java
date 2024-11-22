@@ -13,6 +13,7 @@ public class ListBooksApplication  implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Hello World");
+		Main main = new Main();
+		main.getAllDataHardApi();
 	}
 }
