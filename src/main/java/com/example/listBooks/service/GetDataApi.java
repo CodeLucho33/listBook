@@ -9,13 +9,14 @@ import java.time.Duration;
 
 public class GetDataApi {
     public String getDataApi(String url) {
+        //For url strict use newHttpClient without followRedirections()
         HttpClient client = HttpClient.newBuilder()
                 .followRedirects(HttpClient.Redirect.NORMAL)
                 .build();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
-                .timeout(Duration.ofSeconds(10))
+                .timeout(Duration.ofSeconds(20))
                 .header("Accept", "application/json")
                 .build();
 
