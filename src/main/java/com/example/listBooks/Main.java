@@ -23,7 +23,7 @@ public class Main {
                 1- Show url with random page!
                 2- Show list of books in page
                 3- Show ten random titles
-                
+                4- Search book by name
                 
                 """;
         System.out.println(menu);
@@ -55,6 +55,8 @@ public class Main {
     private void showTenRandomTitles() {
         List<DataBook> tenBooks = getBooksFromPageRandom(urlRandom).results();
         tenBooks.stream().limit(10).forEach(System.out::println);
+        
+
     }
 
     private ListBooksPage getBooksFromPageRandom(String url)
@@ -68,7 +70,7 @@ public class Main {
 
     private String getNewUrlWithPageRandom(){
         String newUrl =  URL_BASE + getPageRandom();
-        System.out.println("This is the URL of your request"+newUrl);
+        System.out.println("This is the URL of your request"+ newUrl);
         return newUrl;
     }
 
@@ -85,4 +87,13 @@ public class Main {
         System.out.println("Your random pages is: " + randomPage);
         return String.valueOf(randomPage);
     }
-}
+    private String searchBookByTitle(){
+        System.out.println("Entry name book: ");
+        var nameBook = scanner.nextLine();
+        String urlBookByName = URL_BASE+ "/";
+        return nameBook;
+    }
+
+    }
+
+
