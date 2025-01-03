@@ -44,7 +44,8 @@ public class Main {
                         //showAllTitlesInPage();
                         break;
                     case 4:
-                        //showTenTitlesRandom();
+                        System.out.println("Searching book by title...");
+                        searchBookByTitle();
                         break;
                     default:
                         System.out.println("Option invalid, closing app...");
@@ -74,7 +75,7 @@ public class Main {
         return newUrl;
     }
 
-    // GET RANDOM PAGE FROM FIST RESULT
+    // GET RANDOM PAGE FROM FIrST RESULT
     // return String.valueOf(randomPage);
     private String getPageRandom(){
         var json = getDataApi.getDataApi(URL_BASE);
@@ -87,11 +88,31 @@ public class Main {
         System.out.println("Your random pages is: " + randomPage);
         return String.valueOf(randomPage);
     }
-    private String searchBookByTitle(){
-        System.out.println("Entry name book: ");
-        var nameBook = scanner.nextLine();
-        String urlBookByName = URL_BASE+ "/";
-        return nameBook;
+    private void searchBookByTitle(){
+        System.out.println("Entry title book: ");
+        var nameBook = scanner.nextLine().trim();
+
+        //build the URL with the parameter of search
+        String urlBookByName = URL_BASE + "&search=" + nameBook.replace(" ", "%20");
+
+        System.out.println("Searching book related with: " + nameBook);
+
+        try {
+            // Get response of API
+            var jsonResponse = getDataApi.getDataApi(urlBookByName);
+            var booksPage = convertBooks.getDataApi(jsonResponse, ListBooksPage.class);
+
+                if(booksPage.results().isEmpty()){
+                    System.out.println("Sorry, title no found");
+                } else {
+                    System.out.println("Books find:");
+                    booksPage.results().forEach(System.out::println);
+                }
+            // Evaluate if is there any result
+        } catch (RuntimeException e) {
+            System.out.println("¡Something is wrong!");
+        }
+
     }
 
     }
